@@ -1,0 +1,36 @@
+server:
+  port: 8303
+  tomcat:
+    uri-encoding: UTF-8
+    max-threads: 1000
+    min-spare-threads: 30
+    connection-timeout: 5000ms
+    servlet:
+      context-path: /
+    max-http-header-size: 81920
+
+spring:
+  application:
+    name: paytm-payout
+  profiles:
+    active: dev
+
+  devtools:
+    restart:
+      enabled: true
+  mvc:
+    servlet:
+      load-on-startup: 100
+      throw-exception-if-no-handler-found: true
+
+
+paytm:
+  payout:
+    merchant-id: #####################
+    merchant-key: ####################
+    guid: ############################
+    host: https://staging-dashboard.paytm.com
+    callback: https://cf.s666.xyz/cashfree/server/paytm/callback
+    apis:
+      status-query: ${paytm.payout.host}/bpay/api/v1/disburse/order/query
+      bank-transfer: ${paytm.payout.host}/bpay/api/v1/disburse/order/bank
